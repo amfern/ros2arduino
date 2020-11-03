@@ -14,12 +14,16 @@ bool ros2::init(Stream* comm_instance)
   return ros2::init((void*)comm_instance);
 }
 
-bool ros2::init(UDP* comm_instance, const char* p_server_ip, uint16_t server_port)
-{
-  return ros2::init((void*)comm_instance, p_server_ip, server_port, false);
+#ifdef PROFILE_UDP_TRANSPORT
+bool ros2::init(UDP *comm_instance, const char *p_server_ip,
+                uint16_t server_port) {
+  return ros2::init((void *)comm_instance, p_server_ip, server_port, false);
 }
+#endif
 
-bool ros2::init(Client* comm_instance, const char* p_server_ip, uint16_t server_port)
-{
-  return ros2::init((void*)comm_instance, p_server_ip, server_port, true);
+#ifdef PROFILE_TCP_TRANSPORT
+bool ros2::init(Client *comm_instance, const char *p_server_ip,
+                uint16_t server_port) {
+  return ros2::init((void *)comm_instance, p_server_ip, server_port, true);
 }
+#endif

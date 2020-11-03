@@ -58,7 +58,7 @@ size_t uxr_readSerialDataArduino(uint8_t* buf, size_t len, int timeout)
   return rv;
 }
 
-
+#ifdef PROFILE_UDP_TRANSPORT
 static UDP* p_udp;
 static const char* remote_ip_addr;
 static uint16_t remote_port;
@@ -134,8 +134,9 @@ size_t uxr_readUdpDataArduino(uint8_t* buf, size_t len, int timeout)
   return rv;
 }
 
+#endif
 
-
+#ifdef PROFILE_TCP_TRANSPORT
 static Client* p_client;
 
 bool uxr_connectTcpArduino(void* client_instance, const char* ip_address, uint16_t port)
@@ -201,3 +202,4 @@ bool uxr_disconnectTcpArduino()
 
   return true;
 }
+#endif

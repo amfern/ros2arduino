@@ -1,3 +1,5 @@
+#ifdef PROFILE_TCP_TRANSPORT
+
 #include "tcp_transport_external.h"
 #include <ros2/xrcedds/micro_xrce_dds/lib/src/c/profile/transport/ip/tcp/tcp_transport_internal.h>
 
@@ -53,3 +55,4 @@ void uxr_disconnect_tcp_platform(struct uxrTCPPlatform* platform)
   uxr_disconnectTcpArduino();
 }
 
+#endif

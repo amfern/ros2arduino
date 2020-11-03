@@ -1,3 +1,5 @@
+#ifdef PROFILE_UDP_TRANSPORT
+
 #include "udp_transport_external.h"
 #include <ros2/xrcedds/micro_xrce_dds/lib/src/c/profile/transport/ip/udp/udp_transport_internal.h>
 
@@ -44,3 +46,4 @@ size_t uxr_read_udp_data_platform(uxrUDPPlatform* platform, uint8_t* buf,
 
   return rv;
 }
+#endif
