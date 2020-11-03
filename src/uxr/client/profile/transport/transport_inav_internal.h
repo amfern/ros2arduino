@@ -1,13 +1,13 @@
 /*
- * transport_arduino_internal.h
+ * transport_inav_internal.h
  *
  *  Created on: Nov 14, 2018
  *      Author: Kei
  */
 
 
-#ifndef _SRC_C_PROFILE_TRANSPORT_TRANSPORT_ARDUINO_INTERNAL_H_
-#define _SRC_C_PROFILE_TRANSPORT_TRANSPORT_ARDUINO_INTERNAL_H_
+#ifndef _SRC_C_PROFILE_TRANSPORT_TRANSPORT_INAV_INTERNAL_H_
+#define _SRC_C_PROFILE_TRANSPORT_TRANSPORT_INAV_INTERNAL_H_
 
 #include <stdint.h>
 #include <stddef.h>
@@ -17,10 +17,10 @@ extern "C"
 {
 #endif
 
-bool uxr_initSerialArduino(void *serial_instance);
-bool uxr_closeSerialArduino();
-size_t uxr_writeSerialDataArduino(uint8_t* buf, size_t len);
-size_t uxr_readSerialDataArduino(uint8_t* buf, size_t len, int timeout);
+bool uxr_initSerialINav(void *serial_instance);
+bool uxr_closeSerialINav(void);
+size_t uxr_writeSerialDataINav(uint8_t* buf, size_t len);
+size_t uxr_readSerialDataINav(uint8_t* buf, size_t len, int timeout);
 
 #ifdef PROFILE_UDP_TRANSPORT
 bool uxr_initUdpArduino(void* udp_instance, const char* ip_address, uint16_t port);
@@ -42,4 +42,4 @@ bool uxr_disconnectTcpArduino();
 }
 #endif
 
-#endif //_SRC_C_PROFILE_TRANSPORT_TRANSPORT_ARDUINO_INTERNAL_H_
+#endif //_SRC_C_PROFILE_TRANSPORT_TRANSPORT_INAV_INTERNAL_H_

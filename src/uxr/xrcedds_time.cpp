@@ -1,7 +1,10 @@
-#include <Arduino.h>
 
-extern "C" uint32_t dds_getMilliseconds(void)
-{
+extern "C" {
+#include "drivers/time.h"
+#include "platform.h"
+}
+
+extern "C" uint32_t dds_getMilliseconds(void) {
   return millis();
 }
 

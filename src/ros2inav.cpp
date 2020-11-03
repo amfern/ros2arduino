@@ -1,5 +1,5 @@
 /*
- * ros2arduino.cpp
+ * ros2inav.cpp
  *
  *  Created on: Jul 6, 2018
  *      Author: kei
@@ -7,9 +7,9 @@
 
 
 
-#include "ros2arduino.h"
+#include "ros2inav.h"
 
-bool ros2::init(Stream* comm_instance)
+bool ros2::init(serialPort_t* comm_instance)
 {
   return ros2::init((void*)comm_instance);
 }

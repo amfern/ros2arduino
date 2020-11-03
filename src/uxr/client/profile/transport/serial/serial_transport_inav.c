@@ -1,7 +1,7 @@
 #include "serial_transport_external.h"
 #include <ros2/xrcedds/micro_xrce_dds/lib/src/c/profile/transport/serial/serial_protocol_internal.h>
 
-#include "../transport_arduino_internal.h"
+#include "../transport_inav_internal.h"
 
 bool uxr_init_serial_platform(struct uxrSerialPlatform* platform, int fd,
     uint8_t remote_addr, uint8_t local_addr)
@@ -11,14 +11,15 @@ bool uxr_init_serial_platform(struct uxrSerialPlatform* platform, int fd,
   (void) (local_addr);
 
   /* Open device */
-  return uxr_initSerialArduino(platform->serial_instance);
+  return uxr_initSerialINav(platform->serial_instance);
 }
 
 bool uxr_close_serial_platform(struct uxrSerialPlatform* platform)
 {
   (void)(platform);
 
-  return uxr_closeSerialArduino();
+  return uxr_closeSerialINav();
+  return false;
 }
 
 size_t uxr_write_serial_data_platform(uxrSerialPlatform* platform, uint8_t* buf,
@@ -28,7 +29,7 @@ size_t uxr_write_serial_data_platform(uxrSerialPlatform* platform, uint8_t* buf,
 
   size_t rv = 0;
 
-  rv = uxr_writeSerialDataArduino(buf, len);
+  rv = uxr_writeSerialDataINav(buf, len);
   if (0 != rv)
   {
     *errcode = 0;
@@ -47,7 +48,7 @@ size_t uxr_read_serial_data_platform(uxrSerialPlatform* platform, uint8_t* buf,
 
   size_t rv = 0;
 
-  rv = uxr_readSerialDataArduino(buf, len, timeout);
+  rv = uxr_readSerialDataINav(buf, len, timeout);
 
   if (0 < rv)
   {

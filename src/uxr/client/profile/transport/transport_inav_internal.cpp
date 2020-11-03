@@ -1,37 +1,37 @@
-#include "transport_arduino_internal.h"
-#include <Arduino.h>
-#include <Udp.h>
-#include <Client.h>
+#include "transport_inav_internal.h"
 
-static Stream *p_serial;
+extern "C" {
+#include "drivers/serial.h"
+#include "drivers/time.h"
+}
 
-bool uxr_initSerialArduino(void *serial_instance)
+
+static serialPort_t *p_serial;
+
+bool uxr_initSerialINav(void *serial_instance)
 {
   bool rv = true;
 
-  p_serial = (Stream*) serial_instance;
+  p_serial = (serialPort_t *)serial_instance;
 
   return rv;
 }
 
-bool uxr_closeSerialArduino()
+bool uxr_closeSerialINav(void)
 {
   bool rv = true;
 
   return rv;
 }
 
-size_t uxr_writeSerialDataArduino(uint8_t* buf, size_t len)
+size_t uxr_writeSerialDataINav(uint8_t* buf, size_t len)
 {
-  size_t tx_len = 0;
+  serialWriteBuf(p_serial, buf, (int)len);
 
-  tx_len = p_serial->write(buf, len);
-  p_serial->flush();
-
-  return tx_len;
+  return len;
 }
 
-size_t uxr_readSerialDataArduino(uint8_t* buf, size_t len, int timeout)
+size_t uxr_readSerialDataINav(uint8_t* buf, size_t len, int timeout)
 {
   size_t rv = 0;
 
@@ -39,7 +39,7 @@ size_t uxr_readSerialDataArduino(uint8_t* buf, size_t len, int timeout)
 
   while (rv <= 0 && (millis() - pre_time < (uint32_t)timeout))
   {
-    rv = p_serial->available();
+    rv = serialRxBytesWaiting(p_serial);
   }
 
   if(rv > len)
@@ -51,7 +51,7 @@ size_t uxr_readSerialDataArduino(uint8_t* buf, size_t len, int timeout)
   {
     for (size_t i = 0; i < rv; i++)
     {
-      buf[i] = p_serial->read();
+      buf[i] = serialRead(p_serial);
     }
   }
   

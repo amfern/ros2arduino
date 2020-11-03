@@ -14,7 +14,7 @@
 // options: UDP:    0
 //          TCP:    1
 //          SERIAL: 2
-// #define USER_TRANSPORT_TYPE   0
+#define USER_TRANSPORT_TYPE   2
 
 // Set the MTU of the transport.
 #define USER_TRANSPORT_MTU    2048

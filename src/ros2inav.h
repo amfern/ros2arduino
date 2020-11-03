@@ -1,8 +1,6 @@
 /*
- * ros2arduino.h
+ * ros2inav.h
  *
- *  Created on: May 16, 2018
- *      Author: Kei
  */
 
 #ifndef ROS2ARDUINO_H_
